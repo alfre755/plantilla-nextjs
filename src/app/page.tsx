@@ -1,58 +1,100 @@
+import {
+  Card,
+  CardHeader,
+  CardTitle,
+  CardDescription,
+  CardContent,
+} from "@/components/ui/card";
+import Footer from "./_components/footer";
 import Navbar from "./_components/navbar";
+import Image from "next/image";
+
+const services = [
+  {
+    title: "Consultoría",
+    desc: "Diagnóstico estratégico y hoja de ruta para modernizar tu empresa.",
+    content: "Planificación, estrategia y arquitectura con foco en resultados.",
+  },
+  {
+    title: "Desarrollo a medida",
+    desc: "Construcción de software escalable con metodologías ágiles.",
+    content:
+      "Apps modernas, API's y mejoras continuas para crecimiento digital.",
+  },
+  {
+    title: "Soporte y operación",
+    desc: "Mantenimiento continuo y optimización para tu arquitectura.",
+    content:
+      "Servicios de mantenimiento y soporte técnico para garantizar el funcionamiento óptimo de tu infraestructura.",
+  },
+];
 
 export default function Home() {
   return (
-    <div className="flex-column min-h-screen items-center justify-center bg-zinc-50 dark:bg-slate-950 text-slate-900 dark:text-slate-100">
+    <div className="flex flex-col min-h-screen">
       <header>
         <Navbar />
       </header>
-      <main className="w-full max-w-4xl rounded-2xl border border-zinc-200 bg-white p-10 shadow-lg dark:border-zinc-800 dark:bg-zinc-900">
-        <header className="mb-8 text-center">
-          <h1 className="text-4xl font-bold sm:text-5xl">
-            Bienvenido a Plantilla Next.js
-          </h1>
-          <p className="mt-3 text-lg text-zinc-600 dark:text-zinc-300">
-            Inicio rápido con Tailwind, Drizzle y autenticación lista para
-            producir.
-          </p>
-        </header>
-
-        <section className="mb-8 grid gap-4 sm:grid-cols-3">
-          <article className="rounded-xl border border-zinc-200 p-4 dark:border-zinc-800">
-            <h2 className="font-semibold">Rápido</h2>
-            <p className="mt-1 text-sm text-zinc-600 dark:text-zinc-300">
-              Next.js + ISR + Server Components.
+      <main className="flex-1 w-full flex flex-col gap-4">
+        <section id="home" className="relative h-100 overflow-visible">
+          <div className="absolute inset-0">
+            <Image
+              src="/assets/images/fondo2.png"
+              alt="Background"
+              fill
+              className="object-cover"
+              priority
+            />
+          </div>
+          <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/60 to-black/80" />
+          <div className="relative z-10 p-4 text-background text-center">
+            <h1 className="text-3xl font-black leading-tight md:text-5xl md:leading-tight">
+              Soluciones tecnológicas que impulsan tu negocio
+            </h1>
+            <p className="mt-3 text-lg md:text-xl max-w-2xl mx-auto">
+              Automatizamos procesos y entregamos productos digitales robustos
+              para ayudarte a ser más competitivo.
             </p>
-          </article>
-          <article className="rounded-xl border border-zinc-200 p-4 dark:border-zinc-800">
-            <h2 className="font-semibold">Escalable</h2>
-            <p className="mt-1 text-sm text-zinc-600 dark:text-zinc-300">
-              Drizzle ORM + PostgreSQL + migraciones.
+            <p className="mt-4 text-xs md:text-sm uppercase tracking-wider text-primary-light font-semibold">
+              Tu socio digital confiable en cada etapa.
             </p>
-          </article>
-          <article className="rounded-xl border border-zinc-200 p-4 dark:border-zinc-800">
-            <h2 className="font-semibold">U</h2>
-            <p className="mt-1 text-sm text-zinc-600 dark:text-zinc-300">
-              Componentes shadcn/ui personalizables.
-            </p>
-          </article>
+          </div>
         </section>
 
-        <footer className="flex flex-col gap-3 sm:flex-row sm:justify-center">
-          <a
-            href="login"
-            className="rounded-lg bg-blue-600 px-5 py-2 text-white hover:bg-blue-500"
-          >
-            Ir al dashboard
-          </a>
-          <a
-            href="/docs"
-            className="rounded-lg border border-zinc-300 px-5 py-2 text-zinc-700 hover:bg-zinc-100 dark:border-zinc-700 dark:text-zinc-200 dark:hover:bg-zinc-800"
-          >
-            Documentación
-          </a>
-        </footer>
+        <div className="relative mx-auto -mt-16 w-full max-w-6xl px-4 md:px-8">
+          <div className="grid w-full grid-cols-1 gap-4 md:grid-cols-3">
+            {services.map((service) => (
+              <Card
+                key={service.title}
+                className="p-0 bg-background/90 backdrop-blur-sm border border-border shadow-lg"
+              >
+                <CardHeader>
+                  <CardTitle>{service.title}</CardTitle>
+                  <CardDescription>{service.desc}</CardDescription>
+                </CardHeader>
+                <CardContent>
+                  <p>{service.content}</p>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
+        </div>
+        <section
+          id="about"
+          className="bg-foreground text-background p-4 rounded-sm"
+        >
+          b
+        </section>
+        <section
+          id="contact"
+          className="bg-foreground text-background p-4 rounded-sm"
+        >
+          c
+        </section>
       </main>
+      <footer>
+        <Footer />
+      </footer>
     </div>
   );
 }
