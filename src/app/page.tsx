@@ -8,6 +8,7 @@ import {
 import Footer from "./_components/footer";
 import Navbar from "./_components/navbar";
 import Image from "next/image";
+import { CustomCard } from "@/components/shared/custom-card";
 
 const services = [
   {
@@ -64,18 +65,12 @@ export default function Home() {
         <div className="relative mx-auto -mt-16 w-full max-w-6xl px-4 md:px-8">
           <div className="grid w-full grid-cols-1 gap-4 md:grid-cols-3">
             {services.map((service) => (
-              <Card
+              <CustomCard
                 key={service.title}
-                className="p-0 bg-background/90 backdrop-blur-sm border border-border shadow-lg"
-              >
-                <CardHeader>
-                  <CardTitle>{service.title}</CardTitle>
-                  <CardDescription>{service.desc}</CardDescription>
-                </CardHeader>
-                <CardContent>
-                  <p>{service.content}</p>
-                </CardContent>
-              </Card>
+                title={service.title}
+                desc={service.desc}
+                content={service.content}
+              />
             ))}
           </div>
         </div>
