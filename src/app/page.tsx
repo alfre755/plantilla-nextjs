@@ -1,14 +1,9 @@
-import {
-  Card,
-  CardHeader,
-  CardTitle,
-  CardDescription,
-  CardContent,
-} from "@/components/ui/card";
 import Footer from "./_components/footer";
 import Navbar from "./_components/navbar";
 import Image from "next/image";
 import { CustomCard } from "@/components/shared/custom-card";
+import { EnvelopeIcon, MapInIcon, PhoneIcon } from "@/utils/select-icons";
+import FormContact from "./_components/form-contact";
 
 const services = [
   {
@@ -28,6 +23,12 @@ const services = [
     content:
       "Servicios de mantenimiento y soporte técnico para garantizar el funcionamiento óptimo de tu infraestructura.",
   },
+];
+
+const metricas = [
+  { number: "10+", label: "Proyectos entregados" },
+  { number: "2", label: "Años de experiencia" },
+  { number: "100%", label: "Compromiso con el cliente" },
 ];
 
 export default function Home() {
@@ -76,15 +77,78 @@ export default function Home() {
         </div>
         <section
           id="about"
-          className="bg-foreground text-background p-4 rounded-sm"
+          className="py-20 px-4 md:px-8 bg-foreground text-background"
         >
-          b
+          <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+            {/* Texto */}
+            <div>
+              <p className="text-secondary text-sm font-semibold uppercase tracking-widest mb-3">
+                Quiénes somos
+              </p>
+              <h2 className="text-3xl md:text-4xl font-black leading-tight mb-6">
+                Tecnología con propósito, resultados con impacto
+              </h2>
+              <p className="text-background/70 text-base leading-relaxed mb-4">
+                Somos un equipo de ingenieros y estrategas digitales apasionados
+                por construir soluciones que realmente transforman negocios. Nos
+                especializamos en consultoría, desarrollo a medida y soporte
+                continuo.
+              </p>
+              <p className="text-background/70 text-base leading-relaxed">
+                Trabajamos como un socio estratégico, no solo como proveedores.
+                Entendemos tu negocio antes de escribir la primera línea de
+                código.
+              </p>
+            </div>
+
+            {/* Métricas */}
+            <div className="grid grid-cols-3 gap-6 text-center">
+              {metricas.map((stat) => (
+                <div key={stat.label} className="flex flex-col gap-2">
+                  <span className="text-4xl font-black text-secondary">
+                    {stat.number}
+                  </span>
+                  <span className="text-sm text-background/60 leading-tight">
+                    {stat.label}
+                  </span>
+                </div>
+              ))}
+            </div>
+          </div>
         </section>
+
         <section
           id="contact"
-          className="bg-foreground text-background p-4 rounded-sm"
+          className="py-20 px-4 md:px-8 bg-background text-foreground"
         >
-          c
+          <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-12">
+            {/* Encabezado + datos */}
+            <div>
+              <p className="text-primary text-sm font-semibold uppercase tracking-widest mb-3">
+                Contacto
+              </p>
+              <h2 className="text-3xl md:text-4xl font-black leading-tight mb-6">
+                Hablemos de tu próximo proyecto
+              </h2>
+              <p className="text-foreground/60 mb-8 leading-relaxed">
+                Cuéntanos qué necesitas. Responderemos lo antes posible.
+              </p>
+              <div className="flex flex-col gap-4 text-sm text-foreground/70">
+                <span className="flex gap-2">
+                  <EnvelopeIcon className="w-5 h-5" /> alfredo@curidocode.cl
+                </span>
+                <span className="flex gap-2">
+                  <PhoneIcon className="w-5 h-5" /> +569 6442 8992
+                </span>
+                <span className="flex gap-2">
+                  <MapInIcon className="w-5 h-5" /> Curico, Chile
+                </span>
+              </div>
+            </div>
+
+            {/* Formulario */}
+            <FormContact />
+          </div>
         </section>
       </main>
       <footer>

@@ -1,3 +1,4 @@
+"use-client";
 import Image from "next/image";
 import Link from "next/link";
 import { FacebookIcon, LinkedinIcon, TwitterIcon } from "@/utils/select-icons";
@@ -21,10 +22,10 @@ export default function Footer() {
         />
 
         <nav className="flex flex-col md:flex-row gap-4 text-sm ">
-          <Link href="#" className="hover:opacity-60 transition">
+          <Link href="#contact" className="hover:opacity-60 transition">
             Contactanos
           </Link>
-          <Link href="#" className="hover:opacity-60 transition ">
+          <Link href="#about" className="hover:opacity-60 transition ">
             Sobre Nosotros
           </Link>
           <Link href="#" className="hover:opacity-60 transition ">
