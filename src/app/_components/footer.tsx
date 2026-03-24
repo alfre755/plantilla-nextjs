@@ -11,7 +11,7 @@ const socialIcons = [
 
 export default function Footer() {
   return (
-    <footer className="bg-foreground text-background px-6 py-3 ">
+    <footer id="footer" className="bg-foreground text-background px-6 py-3 ">
       <div className="flex flex-col md:flex-row justify-between items-center gap-6">
         <Image
           src="/assets/images/logo_blanco.png"
