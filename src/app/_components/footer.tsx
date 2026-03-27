@@ -1,7 +1,7 @@
-"use-client";
-import Image from "next/image";
+"use client";
 import Link from "next/link";
 import { FacebookIcon, LinkedinIcon, TwitterIcon } from "@/utils/select-icons";
+import { ThemeLogo } from "@/components/shared/theme-logo";
 
 const socialIcons = [
   { name: "LinkedIn", icon: LinkedinIcon, href: "#" },
@@ -13,14 +13,7 @@ export default function Footer() {
   return (
     <footer id="footer" className="bg-foreground text-background px-6 py-3 ">
       <div className="flex flex-col md:flex-row justify-between items-center gap-6">
-        <Image
-          src="/assets/images/logo_blanco.png"
-          alt="Logo"
-          width={120}
-          height={32}
-          priority
-        />
-
+        <ThemeLogo width={120} height={32} inverted defaultColor="white" />
         <nav className="flex flex-col md:flex-row gap-4 text-sm ">
           <Link href="#contact" className="hover:opacity-60 transition">
             Contactanos

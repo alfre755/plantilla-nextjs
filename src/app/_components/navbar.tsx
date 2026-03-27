@@ -2,9 +2,10 @@
 
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
-import Image from "next/image";
 import Link from "next/link";
 import { BarIcon } from "@/utils/select-icons";
+import { ModeToggle } from "@/components/shared/toggle-theme";
+import { ThemeLogo } from "@/components/shared/theme-logo";
 
 const buttonsNav = [
   { label: "Home", href: "#home" },
@@ -18,16 +19,10 @@ export default function Navbar() {
   const [open, setOpen] = useState(false);
 
   return (
-    <header className="bg-foreground text-background w-full relative p-2">
+    <header className="bg-background text-foreground w-full relative p-2">
       <div className="container mx-auto flex h-14 items-center justify-between px-4 sm:px-6">
         <div>
-          <Image
-            src="/assets/images/logo_blanco.png"
-            alt="Logo"
-            width={120}
-            height={32}
-            priority
-          />
+          <ThemeLogo width={120} height={32} />
         </div>
 
         <nav className="hidden sm:flex gap-4">
@@ -49,6 +44,7 @@ export default function Navbar() {
               </Button>
             </Link>
           ))}
+          <ModeToggle />
         </nav>
 
         <Button
@@ -62,7 +58,7 @@ export default function Navbar() {
       </div>
 
       {open && (
-        <div className="sm:hidden absolute left-0 right-0 top-full z-50 bg-foreground border-t border-border shadow-lg">
+        <div className="sm:hidden absolute left-0 right-0 top-full z-50 bg-background border-t border-border shadow-lg">
           <div className="flex flex-col gap-2 p-4">
             {buttonsNav.map((button) => (
               <Link
@@ -70,7 +66,7 @@ export default function Navbar() {
                 href={button.href}
                 onClick={() => setOpen(false)}
               >
-                <Button variant="link-light" className="w-full text-left ">
+                <Button variant="link" className="w-full text-left ">
                   {button.label}
                 </Button>
               </Link>
@@ -82,9 +78,7 @@ export default function Navbar() {
                   href={button.href}
                   onClick={() => setOpen(false)}
                 >
-                  <Button variant="outline" className="w-full text-foreground">
-                    {button.label}
-                  </Button>
+                  <Button variant="outline">{button.label}</Button>
                 </Link>
               ))}
             </div>

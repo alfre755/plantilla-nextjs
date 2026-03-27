@@ -49,7 +49,7 @@ export default function Home() {
             />
           </div>
           <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/60 to-black/80" />
-          <div className="relative z-10 p-4 text-background text-center">
+          <div className="relative z-10 p-4 text-white text-center">
             <h1 className="text-3xl font-black leading-tight md:text-5xl md:leading-tight">
               Soluciones tecnológicas que impulsan tu negocio
             </h1>
@@ -135,13 +135,16 @@ export default function Home() {
               </p>
               <div className="flex flex-col gap-4 text-sm text-foreground/70">
                 <span className="flex gap-2">
-                  <EnvelopeIcon className="w-5 h-5" /> alfredo@curidocode.cl
+                  <EnvelopeIcon className="w-5 h-5 fill-foreground" />
+                  alfredo@curidocode.cl
                 </span>
                 <span className="flex gap-2">
-                  <PhoneIcon className="w-5 h-5" /> +569 6442 8992
+                  <PhoneIcon className="w-5 h-5 fill-foreground" /> +569 6442
+                  8992
                 </span>
                 <span className="flex gap-2">
-                  <MapInIcon className="w-5 h-5" /> Curico, Chile
+                  <MapInIcon className="w-5 h-5 fill-foreground" /> Curico,
+                  Chile
                 </span>
               </div>
             </div>
