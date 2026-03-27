@@ -7,12 +7,19 @@ import { z } from "zod";
 import { AppForm } from "@/components/shared/app-form";
 import { authClient } from "@/lib/auth-client";
 
-const loginSchema = z.object({
+const signUpSchema = z.object({
+  name: z.string().min(2, "Mínimo 2 caracteres"),
   email: z.string().email("Correo inválido"),
   password: z.string().min(6, "Mínimo 6 caracteres"),
 });
 
 const fields: AppFormFieldProps[] = [
+  {
+    name: "name",
+    label: "Nombre",
+    type: "text",
+    placeholder: "Tu nombre completo",
+  },
   {
     name: "email",
     label: "Correo",
@@ -27,24 +34,25 @@ const fields: AppFormFieldProps[] = [
   },
 ];
 
-export default function LoginForm() {
+export default function SignUpForm() {
   const { form, handleSubmit, isLoading } = useAppForm(
-    loginSchema,
-    { email: "", password: "" },
+    signUpSchema,
+    { name: "", email: "", password: "" },
     async (data) => {
-      const result = await authClient.signIn.email({
+      const result = await authClient.signUp.email({
+        name: data.name,
         email: data.email,
         password: data.password,
-        callbackURL: "/dashboard",
+        callbackURL: "/login",
       });
 
-      if (result.error) throw new Error(result.error.message);
+      if (result.error)
+        throw new Error(result.error.message ?? "Error desconocido");
     },
     {
-      successMessage: "Sesión iniciada",
-      successDescription: "Bienvenido de vuelta.",
-      unsuccessMessage: "Error al iniciar sesión",
-      unsuccessDescription: "Revisa tus credenciales e intenta nuevamente.",
+      successMessage: "Cuenta creada",
+      successDescription: "Bienvenido a nuestra aplicación.",
+      unsuccessMessage: "Error al crear cuenta",
     },
   );
 
@@ -53,8 +61,8 @@ export default function LoginForm() {
       form={form}
       onSubmit={handleSubmit}
       isLoading={isLoading}
-      submitLabel="Iniciar sesión"
-      loadingLabel="Iniciando sesión..."
+      submitLabel="Crear cuenta"
+      loadingLabel="Creando cuenta..."
     >
       <AppFormFieldGroup fields={fields} />
     </AppForm>
