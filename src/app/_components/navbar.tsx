@@ -13,7 +13,7 @@ const buttonsNav = [
   { label: "Contactanos", href: "#contact" },
 ];
 
-const buttonsAuth = [{ label: "Login", href: "/login" }];
+const buttonsAuth = [{ label: "Iniciar sesión", href: "/login" }];
 
 export default function Navbar() {
   const [open, setOpen] = useState(false);
