@@ -11,13 +11,13 @@ export default async function AppLayout({
 }: {
   children: React.ReactNode;
 }) {
-  const session = await auth.api.getSession({ headers: await headers() });
-  const role = (session?.user?.role ?? "admin") as NavRole;
+  // const session = await auth.api.getSession({ headers: await headers() });
+  const role = "admin" as NavRole;
 
   return (
     <SidebarProvider>
       <AppSidebar role={role} />
-      <main>
+      <main className="p-4 flex flex-col flex-1 w-full ">
         <SidebarTrigger />
         {children}
       </main>
