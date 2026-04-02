@@ -1,6 +1,6 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useState } from "react";
-import { useForm } from "react-hook-form";
+import { FieldValues, useForm } from "react-hook-form";
 import { toast } from "sonner";
 import { z } from "zod";
 
@@ -11,10 +11,11 @@ interface UseAppFormOptions {
   unsuccessDescription?: string;
 }
 
-export function useAppForm<T extends z.ZodType>(
-  schema: T,
-  defaultValues: z.infer<T>,
-  onSubmit: (data: z.infer<T>) => void | Promise<void>,
+export function useAppForm<T extends FieldValues>(
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  schema: z.ZodType<T, any, any>,
+  defaultValues: T,
+  onSubmit: (data: T) => void | Promise<void>,
   options: UseAppFormOptions = {},
 ) {
   const [isLoading, setIsLoading] = useState(false);
@@ -25,9 +26,11 @@ export function useAppForm<T extends z.ZodType>(
     unsuccessDescription,
   } = options;
 
-  const form = useForm<z.infer<T>>({
-    resolver: zodResolver(schema),
-    defaultValues,
+  const form = useForm<T>({
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    resolver: zodResolver(schema as any) as any,
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    defaultValues: defaultValues as any,
   });
 
   const handleSubmit = form.handleSubmit(async (data) => {
