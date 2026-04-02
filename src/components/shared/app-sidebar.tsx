@@ -15,6 +15,7 @@ import {
   SidebarMenuItem,
 } from "@/components/ui/sidebar";
 import { ModeToggle } from "./toggle-theme";
+import { ThemeLogo } from "./theme-logo";
 
 interface AppSidebarProps {
   role: NavRole;
@@ -27,7 +28,8 @@ export function AppSidebar({ role }: AppSidebarProps) {
   return (
     <Sidebar>
       <SidebarHeader className="flex flex-row items-center justify-between">
-        Mi aplicación <ModeToggle />
+        <ThemeLogo width={50} height={50} /> Curicode Soluciones
+        <ModeToggle />
       </SidebarHeader>
       <SidebarContent>
         {filtered.map((group) => (
