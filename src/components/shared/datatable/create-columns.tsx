@@ -1,5 +1,5 @@
-import { ColumnDef, Row } from "@tanstack/react-table";
-import { ArrowUpDown, Badge, MoreHorizontal } from "lucide-react";
+import { ColumnDef } from "@tanstack/react-table";
+import { ArrowUpDown, MoreHorizontal } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,

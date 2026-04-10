@@ -6,6 +6,7 @@ import { AppFormFieldProps } from "@/types/form";
 import { z } from "zod";
 import { AppForm } from "@/components/shared/app-form";
 import { createUser } from "../actions";
+import { CreateUser } from "../types";
 
 const createUserSchema = z.object({
   email: z.string().email("Correo inválido"),
@@ -45,9 +46,7 @@ export default function CreateUserForm() {
     createUserSchema,
     { email: "", password: "", name: "", role: "user" },
     async (data) => {
-      const result = await createUser(data);
-
-      if (result.error) throw new Error(result.error.message);
+      await createUser(data as CreateUser);
     },
     {
       successMessage: "Usuario creado con éxito",

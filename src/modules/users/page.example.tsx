@@ -1,5 +1,5 @@
 import { columns, Payment } from "./_components/columns";
-import { DataTable } from "@/components/shared/data-table";
+import { DataTable } from "@/components/shared/datatable/data-table";
 
 async function getData(): Promise<Payment[]> {
   // Fetch data from your API here.

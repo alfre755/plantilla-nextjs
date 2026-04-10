@@ -7,6 +7,7 @@ import {
   BreadcrumbSeparator,
 } from "@/components/ui/breadcrumb";
 import React from "react";
+import { SidebarTrigger } from "../ui/sidebar";
 
 export type BreadcrumbItem = {
   label: string;
@@ -25,29 +26,32 @@ export function HeaderPages({
   breadcrumbs,
 }: HeaderPagesProps) {
   return (
-    <div className="flex flex-col gap-2 mb-6">
-      <Breadcrumb>
-        <BreadcrumbList>
-          {breadcrumbs.map((item, index) => {
-            const isLast = index === breadcrumbs.length - 1;
+    <div className="flex flex-col gap-2 mb-6 pt-4">
+      <div className="flex items-center gap-4">
+        <SidebarTrigger />
+        <Breadcrumb>
+          <BreadcrumbList>
+            {breadcrumbs.map((item, index) => {
+              const isLast = index === breadcrumbs.length - 1;
 
-            return (
-              <React.Fragment key={index}>
-                <BreadcrumbItem>
-                  {isLast ? (
-                    <BreadcrumbPage>{item.label}</BreadcrumbPage>
-                  ) : (
-                    <BreadcrumbLink href={item.href ?? "#"}>
-                      {item.label}
-                    </BreadcrumbLink>
-                  )}
-                </BreadcrumbItem>
-                {!isLast && <BreadcrumbSeparator />}
-              </React.Fragment>
-            );
-          })}
-        </BreadcrumbList>
-      </Breadcrumb>
+              return (
+                <React.Fragment key={index}>
+                  <BreadcrumbItem>
+                    {isLast ? (
+                      <BreadcrumbPage>{item.label}</BreadcrumbPage>
+                    ) : (
+                      <BreadcrumbLink href={item.href ?? "#"}>
+                        {item.label}
+                      </BreadcrumbLink>
+                    )}
+                  </BreadcrumbItem>
+                  {!isLast && <BreadcrumbSeparator />}
+                </React.Fragment>
+              );
+            })}
+          </BreadcrumbList>
+        </Breadcrumb>
+      </div>
 
       <h1 className="text-2xl font-bold tracking-tight">{title}</h1>
       {description && (

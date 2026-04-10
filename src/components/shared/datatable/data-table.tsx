@@ -20,9 +20,9 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { Button } from "../ui/button";
 import { useState } from "react";
-import { Input } from "../ui/input";
+import { Input } from "../../ui/input";
+import { DataTablePagination } from "./data-table-pagination";
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
@@ -57,8 +57,8 @@ export function DataTable<TData, TValue>({
   });
 
   return (
-    <div className="flex flex-col">
-      <div className="flex items-center justify-between py-4">
+    <div className="flex flex-col flex-1 min-h-0">
+      <div className="flex items-center justify-between py-4 shrink-0">
         {searchKey && (
           <Input
             placeholder={searchPlaceholder ?? "Buscar..."}
@@ -73,7 +73,7 @@ export function DataTable<TData, TValue>({
         )}
         {action && <div className="ml-auto">{action}</div>}
       </div>
-      <div className="overflow-hidden rounded-md border">
+      <div className="overflow-y-auto overflow-x-hidden rounded-md border flex-1 min-h-0">
         <Table>
           <TableHeader>
             {table.getHeaderGroups().map((headerGroup) => (
@@ -123,21 +123,8 @@ export function DataTable<TData, TValue>({
           </TableBody>
         </Table>
       </div>
-      <div className="flex items-center justify-end space-x-2 py-4">
-        <Button
-          size="sm"
-          onClick={() => table.previousPage()}
-          disabled={!table.getCanPreviousPage()}
-        >
-          Previous
-        </Button>
-        <Button
-          size="sm"
-          onClick={() => table.nextPage()}
-          disabled={!table.getCanNextPage()}
-        >
-          Next
-        </Button>
+      <div className="flex items-center justify-end space-x-2 py-4 shrink-0">
+        <DataTablePagination table={table} />
       </div>
     </div>
   );

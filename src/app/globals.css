@@ -127,3 +127,6 @@
     @apply font-sans;
   }
 }
+.sr-only {
+  overflow: hidden !important;
+}

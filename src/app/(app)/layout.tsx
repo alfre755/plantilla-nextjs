@@ -15,11 +15,10 @@ export default async function AppLayout({
   const role = "admin" as NavRole;
 
   return (
-    <SidebarProvider>
+    <SidebarProvider className="h-svh overflow-hidden">
       <AppSidebar role={role} />
-      <main className="p-4 flex flex-col flex-1 w-full ">
-        <SidebarTrigger />
-        {children}
+      <main className="flex flex-col flex-1 min-w-0 min-h-0 overflow-hidden">
+        <div className="flex flex-col flex-1 min-h-0 px-4 py-4">{children}</div>
       </main>
     </SidebarProvider>
   );

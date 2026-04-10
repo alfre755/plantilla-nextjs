@@ -1,5 +1,6 @@
 "use client";
-import { createColumns } from "@/components/shared/create-columns";
+
+import { createColumns } from "@/components/shared/datatable/create-columns";
 import User from "@/modules/users/types";
 
 export const columns = createColumns<User>(
