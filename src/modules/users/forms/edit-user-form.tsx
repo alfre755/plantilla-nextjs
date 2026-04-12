@@ -5,14 +5,18 @@ import { useAppForm } from "@/hooks/use-app-form";
 import { AppFormFieldProps } from "@/types/form";
 import { z } from "zod";
 import { AppForm } from "@/components/shared/app-form";
-import { createUser } from "../actions";
-import { CreateUser } from "../types";
+import User, { EditUser } from "../types";
+import { editUser } from "../actions";
 
-const createUserSchema = z.object({
+const editUserSchema = z.object({
   email: z.string().email("Correo inválido"),
-  password: z.string().min(6, "Mínimo 6 caracteres"),
+  password: z
+    .string()
+    .min(6, "Mínimo 6 caracteres")
+    .optional()
+    .or(z.literal("")),
   name: z.string().min(2, "Mínimo 2 caracteres"),
-  role: z.enum(["admin", "user"]), // ← sin el segundo argumento
+  role: z.enum(["admin", "user"]),
 });
 
 const fields: AppFormFieldProps[] = [
@@ -46,21 +50,28 @@ const fields: AppFormFieldProps[] = [
   },
 ];
 
-export default function CreateUserForm({
+export default function EditUserForm({
   onSuccess,
+  user,
 }: {
   onSuccess?: () => void;
+  user: User;
 }) {
   const { form, handleSubmit, isLoading } = useAppForm(
-    createUserSchema,
-    { email: "", password: "", name: "", role: "user" },
+    editUserSchema,
+    {
+      email: user.email,
+      password: "",
+      name: user.name,
+      role: (user.role as "admin" | "user") ?? "user",
+    },
     async (data) => {
-      await createUser(data as CreateUser);
+      await editUser(user.id, data as EditUser);
     },
     {
-      successMessage: "Usuario creado con éxito",
-      successDescription: "El usuario ha sido creado con éxito.",
-      unsuccessMessage: "Error al crear usuario",
+      successMessage: "Usuario editado con éxito",
+      successDescription: "El usuario ha sido editado con éxito.",
+      unsuccessMessage: "Error al editar usuario",
       unsuccessDescription: "Revise los datos ingresados e intenta nuevamente.",
       refreshOnSuccess: true,
     },
@@ -72,8 +83,8 @@ export default function CreateUserForm({
       form={form}
       onSubmit={handleSubmit}
       isLoading={isLoading}
-      submitLabel="Crear usuario"
-      loadingLabel="Creando usuario..."
+      submitLabel="Editar usuario"
+      loadingLabel="Editando usuario..."
     >
       <AppFormFieldGroup fields={fields} />
     </AppForm>
