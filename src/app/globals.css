@@ -130,3 +130,6 @@
 .sr-only {
   overflow: hidden !important;
 }
+nextjs-portal {
+  display: none;
+}
