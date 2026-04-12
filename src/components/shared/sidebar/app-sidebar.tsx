@@ -14,14 +14,22 @@ import {
   SidebarMenuButton,
   SidebarMenuItem,
 } from "@/components/ui/sidebar";
-import { ModeToggle } from "./toggle-theme";
-import { ThemeLogo } from "./theme-logo";
+import { ModeToggle } from "../toggle-theme";
+import { ThemeLogo } from "../theme-logo";
+import { auth } from "@/lib/auth";
+import { AppSidebarFooter } from "./app-sidebar-footer";
+
+type SessionData = Awaited<ReturnType<typeof auth.api.getSession>>;
+type SessionUser = NonNullable<SessionData>["user"];
 
 interface AppSidebarProps {
-  role: NavRole;
+  session: SessionData | null;
 }
 
-export function AppSidebar({ role }: AppSidebarProps) {
+export function AppSidebar({ session }: AppSidebarProps) {
+  const sessionData = session?.session;
+  const user = session?.user;
+  const role = (user?.role ?? "user") as NavRole;
   const pathname = usePathname();
   const filtered = navGroups.filter((g) => g.roles.includes(role));
 
@@ -55,6 +63,7 @@ export function AppSidebar({ role }: AppSidebarProps) {
           </SidebarGroup>
         ))}
       </SidebarContent>
+      <AppSidebarFooter user={user} />
     </Sidebar>
   );
 }
