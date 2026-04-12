@@ -49,7 +49,8 @@ export type ColumnConfig<TData> =
 // Acción del dropdown
 export type RowAction<TData> = {
   label: string;
-  onClick: (row: TData) => void;
+  onClick?: (row: TData) => void;
+  render?: (row: TData) => React.ReactNode; // 👈 nuevo
   separator?: boolean; // pone un separador ANTES de esta acción
   variant?: "default" | "destructive";
 };
@@ -142,14 +143,21 @@ export function createColumns<TData>(
             {actions.map((action, i) => (
               <div key={i}>
                 {action.separator && <DropdownMenuSeparator />}
-                <DropdownMenuItem
-                  onClick={() => action.onClick(row.original)}
-                  className={
-                    action.variant === "destructive" ? "text-destructive" : ""
-                  }
-                >
-                  {action.label}
-                </DropdownMenuItem>
+                {action.render ? (
+                  // 👇 render custom, sin DropdownMenuItem para no interferir con el AlertDialog
+                  <div className="relative flex cursor-default select-none items-center rounded-sm px-2 py-1.5 text-sm outline-none">
+                    {action.render(row.original)}
+                  </div>
+                ) : (
+                  <DropdownMenuItem
+                    onClick={() => action.onClick?.(row.original)}
+                    className={
+                      action.variant === "destructive" ? "text-destructive" : ""
+                    }
+                  >
+                    {action.label}
+                  </DropdownMenuItem>
+                )}
               </div>
             ))}
           </DropdownMenuContent>
