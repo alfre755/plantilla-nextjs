@@ -10,7 +10,7 @@ import {
 
 interface AppDialogProps {
   title: string;
-  trigger: React.ReactNode;
+  trigger?: React.ReactNode;
   children: React.ReactNode;
   open?: boolean;
   onOpenChange?: (open: boolean) => void;
@@ -25,7 +25,7 @@ export function AppDialog({
 }: AppDialogProps) {
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogTrigger asChild>{trigger}</DialogTrigger>
+      {trigger && <DialogTrigger asChild>{trigger}</DialogTrigger>}
       <DialogContent>
         <DialogHeader>
           <DialogTitle>{title}</DialogTitle>
