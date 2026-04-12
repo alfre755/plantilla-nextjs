@@ -13,6 +13,7 @@ export interface AppFormFieldProps {
   name: string;
   label: string;
   placeholder?: string;
+  options?: { value: string; label: string }[]; // para selects
   type?: FieldType;
   render?: (field: ControllerRenderProps) => React.ReactNode; // escape hatch para tipos custom
 }
