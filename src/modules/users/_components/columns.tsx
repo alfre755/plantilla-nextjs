@@ -3,6 +3,11 @@
 import { createColumns } from "@/components/shared/datatable/create-columns";
 import User from "@/modules/users/types";
 
+import { DeleteUserButton } from "./delete-user-button";
+import { EditUserButton } from "./edit-user-button";
+import { ViewUserButton } from "./view-user-button";
+import { CopyEmailButton } from "./copy-email.button";
+
 export const columns = createColumns<User>(
   [
     { accessorKey: "name", label: "Nombre", type: "text", sortable: true },
@@ -29,10 +34,22 @@ export const columns = createColumns<User>(
     },
   ],
   [
-    { label: "Ver perfil", onClick: (user) => console.log(user) },
+    {
+      label: "Ver detalles",
+      render: (user) => <ViewUserButton user={user} />,
+    },
+    {
+      label: "Copiar email",
+      render: (user) => <CopyEmailButton user={user} />,
+    },
+    {
+      label: "Editar",
+      render: (user) => <EditUserButton user={user} />,
+      separator: true,
+    },
     {
       label: "Eliminar",
-      onClick: (user) => console.log(user),
+      render: (user) => <DeleteUserButton user={user} />,
       separator: true,
       variant: "destructive",
     },
