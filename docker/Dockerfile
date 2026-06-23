@@ -32,9 +32,10 @@ COPY . .
 
 ENV NEXT_TELEMETRY_DISABLED=1
 # Build the application with dummy values for env variables
-ENV RESEND_API_KEY=dummy_key_for_build
 ENV DATABASE_URL=postgresql://dummy:dummy@localhost:5432/dummy
-ENV NEXTAUTH_SECRET=dummy_secret_for_build
+ENV BETTER_AUTH_SECRET=dummy_secret_for_build
+ENV BETTER_AUTH_URL=http://localhost:3000
+ENV NEXT_PUBLIC_APP_URL=http://localhost:3000
 
 # Compilar la aplicaciรณn Next.js
 # Next.js 16 se instala automรกticamente desde package.json durante pnpm install
@@ -72,8 +73,7 @@ COPY --from=builder --chown=nextjs:nodejs /app/.next/static ./.next/static
 COPY --from=builder --chown=nextjs:nodejs /app/drizzle ./drizzle
 COPY --from=builder --chown=nextjs:nodejs /app/drizzle.config.ts ./
 COPY --from=builder --chown=nextjs:nodejs /app/tsconfig.json ./
-COPY --from=builder --chown=nextjs:nodejs /app/src/server/db ./src/server/db
-COPY --from=builder --chown=nextjs:nodejs /app/src/env.js ./src/env.js
+COPY --from=builder --chown=nextjs:nodejs /app/src/db ./src/db
 
 # Copiar entrypoint y hacerlo ejecutable (ANTES de cambiar de usuario)
 COPY docker/entrypoint.sh /entrypoint.sh
@@ -89,3 +89,4 @@ ENV HOSTNAME="0.0.0.0"
 
 # Usar entrypoint en lugar de CMD directo
 ENTRYPOINT ["/entrypoint.sh"]
+CMD ["node", "server.js"]
