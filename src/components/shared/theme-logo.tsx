@@ -22,8 +22,8 @@ export function ThemeLogo({
 
   const isDark = mounted
     ? inverted
-      ? resolvedTheme === "light" // footer: fondo oscuro en light, claro en dark
-      : resolvedTheme === "dark" // navbar: fondo sigue el tema
+      ? resolvedTheme === "light" // footer: fondo oscuro en light, claro en dark/brand
+      : resolvedTheme === "dark" || resolvedTheme === "brand" // navbar: fondo sigue el tema
     : defaultColor === "white";
 
   return (
