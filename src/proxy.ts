@@ -1,12 +1,13 @@
 // proxy.ts
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
+import { getSessionCookie } from "better-auth/cookies";
 
 const protectedRoutes = ["/dashboard", "/users", "/settings"];
 const authRoutes = ["/login", "/sign-up"];
 
 export function proxy(request: NextRequest) {
-  const sessionCookie = request.cookies.get("better-auth.session_token");
+  const sessionCookie = getSessionCookie(request);
   const pathname = request.nextUrl.pathname;
 
   const isProtected = protectedRoutes.some((route) =>
