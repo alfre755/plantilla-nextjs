@@ -1,6 +1,7 @@
 import { ColumnDef } from "@tanstack/react-table";
 import { ArrowUpDown, MoreHorizontal } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -107,7 +108,7 @@ export function createColumns<TData>(
         cell: ({ row }) => {
           const value = row.getValue(col.accessorKey) as string;
           const variant = col.variants?.[value] ?? "secondary";
-          return "a";
+          return <Badge variant={variant}>{String(value)}</Badge>;
         },
       };
     }
@@ -144,10 +145,16 @@ export function createColumns<TData>(
               <div key={i}>
                 {action.separator && <DropdownMenuSeparator />}
                 {action.render ? (
-                  // 👇 render custom, sin DropdownMenuItem para no interferir con el AlertDialog
-                  <div className="relative flex cursor-default select-none items-center rounded-sm px-2 py-1.5 text-sm outline-none">
+                  // onSelect previene el cierre/devolución de foco por defecto del menú,
+                  // que compite con la apertura del Dialog/AlertDialog que dispara el render custom.
+                  <DropdownMenuItem
+                    onSelect={(e) => e.preventDefault()}
+                    className={
+                      action.variant === "destructive" ? "text-destructive" : ""
+                    }
+                  >
                     {action.render(row.original)}
-                  </div>
+                  </DropdownMenuItem>
                 ) : (
                   <DropdownMenuItem
                     onClick={() => action.onClick?.(row.original)}
